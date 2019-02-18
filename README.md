@@ -39,6 +39,7 @@ Bucket list:
 
 Things it'll need (easier to search for libraries later on):
 
+- A task runner (such as Grunt, Gulp, etc).
 - Copy directory recursively.
 - Template parsing.
 - Package Global state.
