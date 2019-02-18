@@ -19,7 +19,7 @@
 
 <!-- tocstop -->
 
-# Usage
+## Usage
 
 <!-- usage -->
 
@@ -37,14 +37,14 @@ USAGE
 
 <!-- usagestop -->
 
-# Commands
+## Commands
 
 <!-- commands -->
 
 - [`kagrenac hello [FILE]`](#kagrenac-hello-file)
 - [`kagrenac help [COMMAND]`](#kagrenac-help-command)
 
-## `kagrenac hello [FILE]`
+### `kagrenac hello [FILE]`
 
 describe the command here
 
@@ -64,7 +64,7 @@ EXAMPLE
 
 _See code: [src/commands/hello.ts](https://github.com/esoui/kagrenac/blob/v0.0.0/src/commands/hello.ts)_
 
-## `kagrenac help [COMMAND]`
+### `kagrenac help [COMMAND]`
 
 display help for kagrenac
 
@@ -83,7 +83,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.6
 
 <!-- commandsstop -->
 
-## Legal
+### Legal
 
 [The MIT License](LICENSE) © 2019 ESOUI Community.
 
