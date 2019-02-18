@@ -7,7 +7,7 @@
 
 # Kagrenac
 
-> Lord Kagrenac was the Dwemeri Chief Tonal Architect during the time of the First Council. The foremost arcane philosopher and magecrafter of the Dwemer, he was a "pioneer" in the field of mythopoeic forces, and devised tools with which to harness them with the intent of transcending the limits of Dwemer mortality.
+> [Lord Kagrenac](https://en.uesp.net/wiki/Lore:Kagrenac) was the Dwemeri Chief Tonal Architect during the time of the First Council. The foremost arcane philosopher and magecrafter of the Dwemer, he was a "pioneer" in the field of mythopoeic forces, and devised tools with which to harness them with the intent of transcending the limits of Dwemer mortality.
 
 ## About
 
