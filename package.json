@@ -14,9 +14,15 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
+    "@oclif/test": "^1",
     "@oclif/tslint": "^3",
+    "@types/chai": "^4",
+    "@types/mocha": "^5",
     "@types/node": "^10",
+    "chai": "^4",
     "globby": "^8",
+    "mocha": "^5",
+    "nyc": "^13.3.0",
     "ts-node": "^8",
     "tslint": "^5",
     "tslint-config-prettier": "^1.18.0",
@@ -47,9 +53,9 @@
   "repository": "esoui/kagrenac",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
-    "posttest": "tslint -p . -t stylish",
+    "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "echo NO TESTS",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"

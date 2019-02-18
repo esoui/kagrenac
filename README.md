@@ -1,6 +1,7 @@
 [![Version](https://img.shields.io/npm/v/kagrenac.svg)](https://npmjs.org/package/kagrenac)
 [![CircleCI](https://circleci.com/gh/esoui/kagrenac/tree/master.svg?style=shield)](https://circleci.com/gh/esoui/kagrenac/tree/master)
 [![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/esoui/kagrenac?branch=master&svg=true)](https://ci.appveyor.com/project/esoui/kagrenac/branch/master)
+[![Codecov](https://codecov.io/gh/esoui/kagrenac/branch/master/graph/badge.svg)](https://codecov.io/gh/esoui/kagrenac)
 [![Downloads](https://img.shields.io/npm/dw/kagrenac.svg)](https://npmjs.org/package/kagrenac)
 [![License](https://img.shields.io/npm/l/kagrenac.svg)](https://github.com/esoui/kagrenac/blob/master/package.json)
 
