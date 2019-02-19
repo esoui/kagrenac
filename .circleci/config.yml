@@ -1,56 +1,65 @@
 ---
 version: 2
 jobs:
-  node-latest: &test
-    docker:
-      - image: node:latest
-    working_directory: ~/cli
+  install:
+    docker: &docker
+      - image: node:10
     steps:
       - checkout
       - restore_cache: &restore_cache
           keys:
-            - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
-            - v1-npm-{{checksum ".circleci/config.yml"}}
-      - run:
-          name: Install dependencies
-          command: yarn
-      - run: ./bin/run --version
-      - run: ./bin/run --help
-      - run:
-          name: Testing
-          command: yarn test
-      - run:
-          name: Submitting code coverage to codecov
-          command: |
-            ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
-            curl -s https://codecov.io/bash | bash
-  node-8:
-    <<: *test
-    docker:
-      - image: node:8
-  cache:
-    <<: *test
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: yarn
+            - v1-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+            - v1-{{checksum ".circleci/config.yml"}}
+            - v1
+      - run: yarn
       - save_cache:
-          key: v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+          key: v1-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
           paths:
-            - ~/cli/node_modules
+            - ~/project/node_modules
             - /usr/local/share/.cache/yarn
             - /usr/local/share/.config/yarn
-
+  test:
+    docker: *docker
+    steps:
+      - checkout
+      - restore_cache:
+          <<: *restore_cache
+      - run: yarn lint
+      - run: yarn test
+      - run: |
+          ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
+          curl -s https://codecov.io/bash | bash
+  build:
+    docker: *docker
+    steps:
+      - checkout
+      - restore_cache:
+          <<: *restore_cache
+      - run: yarn build
+      - persist_to_workspace:
+          root: ./dist
+          paths:
+            - "*/*"
+  publish:
+    docker:
+      - image: circleci/golang:1.8
+    steps:
+      - attach_workspace:
+          at: ./dist
+      - run: |
+          go get github.com/tcnksm/ghr
+          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ./dist/
 workflows:
   version: 2
   "kagrenac":
     jobs:
-      - node-latest
-      - node-8
-      - cache:
+      - install
+      - test
+      - build: &versioned
           filters:
             tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
+              only: /^v.+/
+      - publish:
+          <<: *versioned
+          requires:
+            - build
