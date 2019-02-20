@@ -1,12 +1,9 @@
 ---
 version: 2
-defaults: &defaults
-  docker:
-    - image: node:10
-  working_directory: ~/cli
 jobs:
   test:
-    <<: *defaults
+    docker:
+      - image: node:10
     steps:
       - checkout
       - restore_cache: &restore_cache
@@ -27,12 +24,14 @@ jobs:
           npx nyc report --reporter text-lcov > coverage.lcov
           curl -s https://codecov.io/bash | bash
   pack:
-    <<: *defaults
+    docker:
+      - image: node:10
     steps:
-      - checkout
+      - run: git clone --branch ${CIRCLE_TAG:-$CIRCLE_BRANCH} ${CIRCLE_REPOSITORY_URL} .
       - restore_cache:
           <<: *restore_cache
-      - run: apt update && apt install -y p7zip
+      - run: yarn
+      - run: apt update && apt install -y p7zip-full
       - run: yarn run pack
       - persist_to_workspace:
           root: ./dist
@@ -49,22 +48,18 @@ jobs:
           ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ./dist/
 workflows:
   version: 2
-  regular:
-    jobs:
-      - test
-  release:
+  kagrenac:
     jobs:
       - test:
+          filters:
+            tags:
+              ignore: /.+/
+      - pack:
           filters: &tags-only
             branches:
               ignore: /.*/
             tags:
               only: /.+/
-      - pack: 
-          requires:
-            - test
-          filters:
-            <<: *tags-only
       - publish:
           requires:
             - pack
