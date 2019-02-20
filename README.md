@@ -1,6 +1,5 @@
 [![Version](https://img.shields.io/npm/v/kagrenac.svg)](https://npmjs.org/package/kagrenac)
 [![CircleCI](https://circleci.com/gh/esoui/kagrenac/tree/master.svg?style=shield)](https://circleci.com/gh/esoui/kagrenac/tree/master)
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/esoui/kagrenac?branch=master&svg=true)](https://ci.appveyor.com/project/esoui/kagrenac/branch/master)
 [![Codecov](https://codecov.io/gh/esoui/kagrenac/branch/master/graph/badge.svg)](https://codecov.io/gh/esoui/kagrenac)
 [![Downloads](https://img.shields.io/npm/dw/kagrenac.svg)](https://npmjs.org/package/kagrenac)
 [![License](https://img.shields.io/npm/l/kagrenac.svg)](https://github.com/esoui/kagrenac/blob/master/package.json)
@@ -13,65 +12,67 @@
 
 **Kagrenac** is CLI tool to aid in developing and publishing Elder Scrolls® Online add-ons on [ESOUI](https://www.esoui.com).
 
-<!-- toc -->
-
-- [Usage](#usage)
-- [Commands](#commands)
-
-<!-- tocstop -->
-
 ## Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g kagrenac
-$ kagrenac COMMAND
+$ kag COMMAND
 running command...
-$ kagrenac (-v|--version|version)
+$ kag (-v|--version|version)
 kagrenac/0.0.0 linux-x64 node-v11.8.0
-$ kagrenac --help [COMMAND]
+$ kag --help [COMMAND]
 USAGE
-  $ kagrenac COMMAND
+  $ kag COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 ## Commands
 
 <!-- commands -->
+* [`kag create TITLE`](#kag-create-title)
+* [`kag help [COMMAND]`](#kag-help-command)
 
-- [`kagrenac hello [FILE]`](#kagrenac-hello-file)
-- [`kagrenac help [COMMAND]`](#kagrenac-help-command)
+### `kag create TITLE`
 
-### `kagrenac hello [FILE]`
-
-describe the command here
+create new add-on from a template
 
 ```
 USAGE
-  $ kagrenac hello [FILE]
+  $ kag create TITLE
+
+ARGUMENTS
+  TITLE  add-on name that will be displayed in game
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -a, --api=api                  [default: 100026] interface version the add-on is compatible with
+  -d, --description=description  description of the add-on
+  -h, --help                     show CLI help
+  -n, --name=name                name of the add-on
+
+  -p, --path=path                (required) [default: /home/arthur/Documents/Elder Scrolls Online/live/AddOns] where the
+                                 add-on will be created
+
+  -t, --template=template        (required) [default: standalone] name of built-in template or path to your own
+
+  -u, --author=author            [default: Your Name] author of the add-on
+
+  -v, --variables=variables      space separated name of saved variables
 
 EXAMPLE
-  $ kagrenac hello
-  hello world from ./src/hello.ts!
+  $ kagrenac create
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/esoui/kagrenac/blob/v0.0.0/src/commands/hello.ts)_
+_See code: [src/commands/create.ts](https://github.com/esoui/kagrenac/blob/v0.0.0/src/commands/create.ts)_
 
-### `kagrenac help [COMMAND]`
+### `kag help [COMMAND]`
 
-display help for kagrenac
+display help for kag
 
 ```
 USAGE
-  $ kagrenac help [COMMAND]
+  $ kag help [COMMAND]
 
 ARGUMENTS
   COMMAND  command to show help for
@@ -81,10 +82,9 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.6/src/commands/help.ts)_
-
 <!-- commandsstop -->
 
-### Legal
+## Legal
 
 [The MIT License](LICENSE) © 2019 ESOUI Community.
 
