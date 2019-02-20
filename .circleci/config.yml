@@ -1,9 +1,12 @@
 ---
 version: 2
+defaults: &defaults
+  docker:
+    - image: node:10
+  working_directory: ~/cli
 jobs:
   test:
-    docker: &docker
-      - image: circleci/node:10
+    <<: *defaults
     steps:
       - checkout
       - restore_cache: &restore_cache
@@ -24,12 +27,12 @@ jobs:
           npx nyc report --reporter text-lcov > coverage.lcov
           curl -s https://codecov.io/bash | bash
   pack:
-    docker: *docker
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           <<: *restore_cache
-      - run: sudo apt install p7zip
+      - run: apt update && apt install -y p7zip
       - run: yarn run pack
       - persist_to_workspace:
           root: ./dist
