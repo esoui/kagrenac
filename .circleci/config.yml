@@ -1,7 +1,7 @@
 ---
 version: 2
 jobs:
-  install:
+  test:
     docker: &docker
       - image: node:10
     steps:
@@ -15,15 +15,9 @@ jobs:
       - save_cache:
           key: v1-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
           paths:
-            - ~/project/node_modules
+            - node_modules
             - /usr/local/share/.cache/yarn
             - /usr/local/share/.config/yarn
-  test:
-    docker: *docker
-    steps:
-      - checkout
-      - restore_cache:
-          <<: *restore_cache
       - run: yarn lint
       - run: yarn test
       - run: |
@@ -51,15 +45,15 @@ jobs:
           ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ./dist/
 workflows:
   version: 2
-  "kagrenac":
+  kagrenac:
     jobs:
-      - install
       - test
-      - build: &versioned
+      - build: 
+          requires:
+            - test
           filters:
             tags:
               only: /^v.+/
       - publish:
-          <<: *versioned
           requires:
             - build
