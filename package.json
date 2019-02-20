@@ -1,6 +1,6 @@
 {
   "name": "kagrenac",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "author": "ESOUI Community",
   "bin": {
     "kag": "./bin/run"

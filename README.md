@@ -20,7 +20,7 @@ $ npm install -g kagrenac
 $ kag COMMAND
 running command...
 $ kag (-v|--version|version)
-kagrenac/0.1.2 linux-x64 node-v11.8.0
+kagrenac/0.1.0 linux-x64 node-v11.8.0
 $ kag --help [COMMAND]
 USAGE
   $ kag COMMAND
@@ -64,7 +64,7 @@ EXAMPLE
   $ kagrenac create
 ```
 
-_See code: [src/commands/create.ts](https://github.com/esoui/kagrenac/blob/v0.1.2/src/commands/create.ts)_
+_See code: [src/commands/create.ts](https://github.com/esoui/kagrenac/blob/v0.1.0/src/commands/create.ts)_
 
 ### `kag help [COMMAND]`
 
