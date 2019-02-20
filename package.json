@@ -3,14 +3,19 @@
   "version": "0.0.0",
   "author": "ESOUI Community",
   "bin": {
-    "kagrenac": "./bin/run"
+    "kag": "./bin/run"
   },
   "bugs": "https://github.com/esoui/kagrenac/issues",
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
-    "tslib": "^1"
+    "@types/yeoman-generator": "^3.0.2",
+    "change-case": "^3.1.0",
+    "platform-folders": "^0.3.2",
+    "tslib": "^1.9.3",
+    "yeoman-environment": "^2.3.4",
+    "yeoman-generator": "^3.2.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
@@ -23,19 +28,21 @@
     "globby": "^8",
     "mocha": "^5",
     "nyc": "^13.3.0",
+    "pkg": "^4.3.7",
+    "rimraf": "^2.6.3",
     "ts-node": "^8",
     "tslint": "^5",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10"
   },
   "files": [
+    "/oclif.manifest.json",
     "/bin",
     "/lib",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
+    "/templates"
   ],
   "homepage": "https://github.com/esoui/kagrenac",
   "keywords": [
@@ -45,18 +52,20 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "kagrenac",
+    "bin": "kag",
     "plugins": [
       "@oclif/plugin-help"
     ]
   },
   "repository": "esoui/kagrenac",
   "scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "posttest": "tslint -p test -t stylish",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "version": "oclif-dev readme && sed -ri'' 's/^## `/### `/g' README.md && git add README.md",
+    "lint": "tslint -p . -t stylish",
+    "pretest": "yarn lint",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest",
+    "pack": "oclif-dev pack",
+    "postpack": "rm -f oclif.manifest.json"
   },
   "types": "lib/index.d.ts"
 }
