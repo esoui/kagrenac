@@ -54,8 +54,6 @@ workflows:
           filters: &tagged-only
             tags:
               only: /.+/
-            branches:
-              ignore: /.*/
       - pack: 
           requires:
             - test
