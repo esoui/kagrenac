@@ -63,7 +63,7 @@
     "lint": "tslint -p . -t stylish",
     "pretest": "yarn lint",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest",
+    "prepack": "rm -rf lib && typescript -b && oclif-dev manifest",
     "pack": "oclif-dev pack",
     "postpack": "rm -f oclif.manifest.json"
   },
