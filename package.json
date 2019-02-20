@@ -59,12 +59,12 @@
   },
   "repository": "esoui/kagrenac",
   "scripts": {
-    "version": "oclif-dev readme && sed -ri'' 's/^## `/### `/g' README.md && git add README.md",
-    "lint": "tslint -p . -t stylish",
-    "pretest": "yarn lint",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "prepack": "rm -rf lib && typescript -b && oclif-dev manifest",
-    "pack": "oclif-dev pack",
+    "version": "npx oclif-dev readme && sed -ri'' 's/^## `/### `/g' README.md && git add README.md",
+    "lint": "npx tslint -p . -t stylish",
+    "pretest": "yarn run lint",
+    "test": "npx nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "prepack": "rm -rf lib && npx tsc -b && npx oclif-dev manifest",
+    "pack": "npx oclif-dev pack",
     "postpack": "rm -f oclif.manifest.json"
   },
   "types": "lib/index.d.ts"
