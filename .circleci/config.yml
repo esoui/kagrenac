@@ -35,11 +35,11 @@ jobs:
       - checkout
       - restore_cache:
           <<: *restore_cache
-      - run: yarn build
+      - run: yarn pack
       - persist_to_workspace:
           root: ./dist
           paths:
-            - "*/*"
+            - "**/*"
   publish:
     docker:
       - image: circleci/golang:1.8
