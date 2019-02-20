@@ -23,7 +23,7 @@ jobs:
       - run: |
           ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
           curl -s https://codecov.io/bash | bash
-  build:
+  pack:
     docker: *docker
     steps:
       - checkout
@@ -45,17 +45,24 @@ jobs:
           ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ./dist/
 workflows:
   version: 2
-  kagrenac:
+  regular:
     jobs:
       - test
-      - build: 
+  release:
+    jobs:
+      - test:
+          filters: &tagged-only
+            tags:
+              only: /.+/
+            branches:
+              ignore: /.*/
+      - pack: 
           requires:
             - test
           filters:
-            tags:
-              only: /^v.+/
-            branches:
-              ignore: /.*/
+            <<: *tagged-only
       - publish:
           requires:
-            - build
+            - pack
+          filters:
+            <<: *tagged-only
