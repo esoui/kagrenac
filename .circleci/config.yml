@@ -29,6 +29,7 @@ jobs:
       - checkout
       - restore_cache:
           <<: *restore_cache
+      - run: sudo apt install p7zip
       - run: yarn run pack
       - persist_to_workspace:
           root: ./dist
@@ -51,18 +52,18 @@ workflows:
   release:
     jobs:
       - test:
-          filters: &tagged-only
-            tags:
-              only: /.+/
+          filters: &tags-only
             branches:
               ignore: /.*/
+            tags:
+              only: /.+/
       - pack: 
           requires:
             - test
           filters:
-            <<: *tagged-only
+            <<: *tags-only
       - publish:
           requires:
             - pack
           filters:
-            <<: *tagged-only
+            <<: *tags-only
