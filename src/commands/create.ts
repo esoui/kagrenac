@@ -54,15 +54,8 @@ export default class Create extends Command {
     }),
     path: flags.string({
       char: "p",
-      description: "where the add-on will be created",
-      required: true,
-      default: () =>
-        path.join(
-          getDocumentsFolder(),
-          "Elder Scrolls Online",
-          "live",
-          "AddOns"
-        )
+      description:
+        "where the add-on will be created (defaults to game add-ons folder)"
     }),
     author: flags.string({
       char: "u",
@@ -119,6 +112,15 @@ export default class Create extends Command {
 
     if (!flags.name) {
       opts.name = pascal(args.title);
+    }
+
+    if (!opts.path) {
+      opts.path = path.join(
+        getDocumentsFolder(),
+        "Elder Scrolls Online",
+        "live",
+        "AddOns"
+      );
     }
 
     if (!(await isDirectory(opts.path))) {
