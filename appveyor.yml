@@ -1,0 +1,23 @@
+version: 0.0.{build}
+skip_non_tags: true
+cache:
+  - '%LOCALAPPDATA%\Yarn -> appveyor.yml'
+  - node_modules -> yarn.lock
+install:
+  - ps: Install-Product node 10 x64
+  - yarn
+test_script:
+  - yarn run lint
+  - yarn run test
+build_script:
+  - yarn run pack -t win32-64x
+artifacts:
+  - path: dist\**\*.*
+    name: tarballs
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: gZGJWTTZrTXkeca11O9fxQyRSbc3aVMCB8utsuR3hY2Ryvj2su9Z/E7L7Tmc+9Qt
+    tag: $(APPVEYOR_REPO_TAG_NAME)
+    artifact: tarballs
+    force_update: true

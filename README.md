@@ -1,5 +1,6 @@
 [![Version](https://img.shields.io/npm/v/kagrenac.svg)](https://npmjs.org/package/kagrenac)
 [![CircleCI](https://circleci.com/gh/esoui/kagrenac/tree/master.svg?style=shield)](https://circleci.com/gh/esoui/kagrenac/tree/master)
+[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/esoui/kagrenac?branch=master&svg=true)]
 [![Codecov](https://codecov.io/gh/esoui/kagrenac/branch/master/graph/badge.svg)](https://codecov.io/gh/esoui/kagrenac)
 [![Downloads](https://img.shields.io/npm/dw/kagrenac.svg)](https://npmjs.org/package/kagrenac)
 [![License](https://img.shields.io/npm/l/kagrenac.svg)](https://github.com/esoui/kagrenac/blob/master/package.json)
@@ -15,6 +16,7 @@
 ## Usage
 
 <!-- usage -->
+
 ```sh-session
 $ npm install -g kagrenac
 $ kag COMMAND
@@ -26,13 +28,15 @@ USAGE
   $ kag COMMAND
 ...
 ```
+
 <!-- usagestop -->
 
 ## Commands
 
 <!-- commands -->
-* [`kag create TITLE`](#kag-create-title)
-* [`kag help [COMMAND]`](#kag-help-command)
+
+- [`kag create TITLE`](#kag-create-title)
+- [`kag help [COMMAND]`](#kag-help-command)
 
 ### `kag create TITLE`
 
@@ -82,6 +86,7 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.6/src/commands/help.ts)_
+
 <!-- commandsstop -->
 
 ## Legal

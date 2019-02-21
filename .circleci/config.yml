@@ -33,7 +33,7 @@ jobs:
           <<: *restore_cache
       - run: yarn
       - run: apt update && apt install -y p7zip-full
-      - run: yarn run pack
+      - run: yarn run pack -t linux-x64
       - persist_to_workspace:
           root: ./dist
           paths:
