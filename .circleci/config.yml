@@ -27,6 +27,7 @@ jobs:
     docker:
       - image: node:10
     steps:
+      - run: mkdir ~/.ssh && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run: git clone --branch ${CIRCLE_TAG:-$CIRCLE_BRANCH} ${CIRCLE_REPOSITORY_URL} .
       - restore_cache:
           <<: *restore_cache
