@@ -1,9 +1,13 @@
 ## APIVersion: <%= api %>
 ## Title: <%= title %>
-<% if (description) { -%>## Description: <%= description %><% } -%>
+<% if (description) { -%>
+## Description: <%= description %>
+<% } -%>
 ## Author: <%= author %>
 ## Version: 1.0.0
 ## AddOnVersion: 100
-<% if (variables) { -%>## SavedVariables: <%= variables %><% } -%>
+<% if (variables) { -%>
+## SavedVariables: <%= variables %>
+<% } -%>
 
 <%= name %>.lua
